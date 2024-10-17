@@ -1,0 +1,32 @@
+name: Test Build with wwise implemented
+
+on: workflow_dispatch
+
+jobs:
+  buildForWindows:
+    name: Build for Windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: false
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-StandaloneWindows
+          restore-keys: Library-
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows
+          buildName: Continuous Integration Test${{ github.event.release.tag_name }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Continuous Integration Test${{ github.event.release.tag_name }}
+          path: build/StandaloneWindows

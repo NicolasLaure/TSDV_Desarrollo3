@@ -45,5 +45,10 @@ namespace FSM
         {
             _isDisabled = false;
         }
+
+        public State GetCurrentState()
+        {
+            return _currentStateSo;
+        }
     }
 }

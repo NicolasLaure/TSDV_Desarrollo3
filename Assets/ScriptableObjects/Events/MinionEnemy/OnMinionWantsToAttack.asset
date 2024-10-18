@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111fc7e93d5b9dc43ab4147a5fd61538, type: 3}
-  m_Name: OnMinionAttackingEvent
+  m_Script: {fileID: 11500000, guid: af786420a7188e044b84f491971ed228, type: 3}
+  m_Name: OnMinionWantsToAttack
   m_EditorClassIdentifier: 
   onEvent:
     m_PersistentCalls:
       m_Calls: []
-  onGameObjectEvent:
+  onTypedEvent:
     m_PersistentCalls:
       m_Calls: []

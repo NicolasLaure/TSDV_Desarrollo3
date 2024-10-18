@@ -1,10 +1,9 @@
+using System;
 using System.Collections.Generic;
-using Events;
+using Events.ScriptableObjects;
 using FSM;
 using Health;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Minion
 {
@@ -14,24 +13,24 @@ namespace Minion
 
         [SerializeField] private HealthPoints healthPoints;
 
-        [Header("Events")] 
-        [SerializeField] private GameObjectEventChannelSO onMinionDeletedEvent;
-        [SerializeField] private GameObjectEventChannelSO onMinionAttackedEvent;
-        [SerializeField] private GameObjectEventChannelSO onMinionAttackingEvent;
+        [Header("Events")]
+        [SerializeField] private MinionAgentEventChannelSO onMinionDeletedEvent;
+        [SerializeField] private MinionAgentEventChannelSO onMinionAttackedEvent;
 
-        [Header("Internal Events")] 
+        [Header("Internal Events")]
         [SerializeField] private ActionEventsWrapper idleEvents;
         [SerializeField] private ActionEventsWrapper moveEvents;
         [SerializeField] private ActionEventsWrapper chargeAttackEvents;
         [SerializeField] private ActionEventsWrapper attackEvents;
         [SerializeField] private ActionEventsWrapper fallbackEvents;
-        
+
         private GameObject _player;
         private State _idleState;
         private State _moveState;
         private State _chargeAttackState;
         private State _attackState;
         private State _fallbackState;
+
 
         protected override void OnDisable()
         {
@@ -42,12 +41,7 @@ namespace Minion
 
         public void SetIsNotInAttackState()
         {
-            onMinionAttackedEvent?.RaiseEvent(gameObject);
-        }
-
-        public void SetIsInAttackState()
-        {
-            onMinionAttackingEvent?.RaiseEvent(gameObject);
+            onMinionAttackedEvent?.RaiseEvent(this);
         }
 
         public GameObject GetPlayer()
@@ -64,7 +58,7 @@ namespace Minion
         {
             Fsm.ChangeState(_attackState);
         }
-        
+
         public void ChangeStateToChargeAttack()
         {
             Fsm.ChangeState(_chargeAttackState);
@@ -72,19 +66,19 @@ namespace Minion
 
         public void ChangeStateToIdle()
         {
-             Fsm.ChangeState(_idleState);
+            Fsm.ChangeState(_idleState);
         }
 
         public void ChangeStateToFallingBack()
         {
             Fsm.ChangeState(_fallbackState);
         }
-        
+
         public void SetPlayer(GameObject player)
         {
             _player = player;
         }
-        
+
         protected override List<State> GetStates()
         {
             _idleState = CreateStateWithEvents(idleEvents);
@@ -104,9 +98,18 @@ namespace Minion
 
             Transition attackToFallbackTransition = new Transition(_attackState, _fallbackState);
             _attackState.AddTransition(attackToFallbackTransition);
-            
+
             Transition fallbackToIdleTransition = new Transition(_fallbackState, _idleState);
             _fallbackState.AddTransition(fallbackToIdleTransition);
+
+            Transition moveToIdle = new Transition(_moveState, _idleState);
+            _moveState.AddTransition(moveToIdle);
+            
+            Transition chargeToIdle = new Transition(_chargeAttackState, _idleState);
+            _chargeAttackState.AddTransition(chargeToIdle);
+            
+            Transition attackToIdle = new Transition(_attackState, _idleState);
+            _attackState.AddTransition(attackToIdle);
 
             return new List<State>
                 ()
@@ -129,15 +132,40 @@ namespace Minion
             return state;
         }
 
+        private void ClearStateWithEvent(State state, ActionEventsWrapper eventsWrapper)
+        {
+            state.EnterAction -= eventsWrapper.ExecuteOnEnter;
+            state.UpdateAction -= eventsWrapper.ExecuteOnUpdate;
+            state.ExitAction -= eventsWrapper.ExecuteOnExit;
+        }
+
+
         public void Die()
         {
-            if(healthPoints.CurrentHp <= 0)
-                onMinionDeletedEvent?.RaiseEvent(gameObject);
+            if (healthPoints.CurrentHp <= 0)
+                onMinionDeletedEvent?.RaiseEvent(this);
         }
 
         public GameObject GetModel()
         {
             return model;
+        }
+
+        [ContextMenu("CurrentState")]
+        public void DebugCurrentState()
+        {
+            State currentState = Fsm.GetCurrentState();
+            if(currentState == _idleState)
+                Debug.Log("Idle");
+            else if(currentState == _moveState)
+                Debug.Log("Move");
+            else if(currentState == _chargeAttackState)
+                Debug.Log("Charge");
+            else if(currentState == _fallbackState)
+                Debug.Log("Fallback");
+            else if(currentState == _attackState)
+                Debug.Log("Attack");
+                
         }
     }
 }

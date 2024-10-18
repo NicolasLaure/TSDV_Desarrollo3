@@ -1,11 +1,11 @@
+using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Events
 {
     [CreateAssetMenu(menuName = "Events/GameObject Channel")]
-    public class GameObjectEventChannelSO : VoidEventChannelSO
+    public class GameObjectEventChannelSO : EventChannelSO<GameObject>
     {
         public UnityEvent<GameObject> onGameObjectEvent;
 

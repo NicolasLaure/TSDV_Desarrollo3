@@ -47,9 +47,8 @@ MonoBehaviour:
   minionSpawnerConfig: {fileID: 11400000, guid: 243747caa98ab304da81a7d8e918fbe4, type: 2}
   minionManagerConfig: {fileID: 11400000, guid: 91033f8a42d6eca46a3415f50b958ebf, type: 2}
   player: {fileID: 0}
-  onMinionDeletedEvent: {fileID: 11400000, guid: d0b8cbd5af6d2924ea50203f22ee5183, type: 2}
+  onMinionDeletedEvent: {fileID: 11400000, guid: 7767544c749c3594abcb1520bca52614, type: 2}
   onAllMinionsDestroyedEvent: {fileID: 11400000, guid: f39644c8bb7ad1d4bbb9e63f25300263, type: 2}
   onGameplayEndEvent: {fileID: 11400000, guid: 96d5e0721ad70d74bb1e98f8163618a2, type: 2}
-  onMinionAttackingEvent: {fileID: 11400000, guid: d6da21df9a9d4484da77989d28c8a5d5, type: 2}
-  onMinionAttackedEvent: {fileID: 11400000, guid: 20923ddabbecbfe47a88ee16889782dd, type: 2}
-  onCanMinionsAttackEvent: {fileID: 11400000, guid: d2afa1c9cce709a4e8fea048047d0169, type: 2}
+  onMinionWantsToAttackEvent: {fileID: 11400000, guid: a6854f84a0adb75498a2c9cf2c71c69a, type: 2}
+  onMinionAttackedEvent: {fileID: 11400000, guid: eb9504e07a181c74e80867e1fcde1d18, type: 2}

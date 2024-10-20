@@ -26,3 +26,6 @@ MonoBehaviour:
       spawnCooldown: 2
       spawnQuantity: 10
       acceleration: 30
+  minionsData:
+    managerData: {fileID: 11400000, guid: 8cd32077c5b690d438b85c3fe7c4cc97, type: 2}
+    spawnerData: {fileID: 11400000, guid: d46629b6d3b2c1f46b45324709c13e79, type: 2}

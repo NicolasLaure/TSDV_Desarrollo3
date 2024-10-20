@@ -29,7 +29,7 @@ namespace LevelManagement
             _levelConfig = loopConfig;
 
             obstacleSequence.SetupSequence(_levelConfig.roadData);
-            minionsSequence.SetupSequence();
+            minionsSequence.SetupSequence(_levelConfig.minionsData);
             bossSequence.SetupSequence(_levelConfig.bossData);
             
             obstacleSequence.SetLevelConfig(_levelConfig);

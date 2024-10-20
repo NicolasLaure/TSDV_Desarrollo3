@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Events;
 using Events.ScriptableObjects;
+using LevelManagement;
 using Minion.Controllers;
 using Minion.ScriptableObjects;
 using UnityEngine;
@@ -12,8 +13,6 @@ namespace Minion.Manager
 {
     public class MinionManager : MonoBehaviour
     {
-        [SerializeField] private MinionSpawnerSO minionSpawnerConfig;
-        [SerializeField] private MinionsManagerSO minionManagerConfig;
         [SerializeField] private GameObject player;
 
         [Header("Events")]
@@ -29,6 +28,10 @@ namespace Minion.Manager
         private List<MinionAgent> _attackQueue;
         private List<MinionAgent> _attackingMinions;
 
+        private MinionSpawnerSO _minionSpawnerConfig;
+        private MinionsManagerSO _minionManagerConfig;
+
+        
         protected void OnEnable()
         {
             _spawnCoroutine = StartCoroutine(SpawnMinions());
@@ -108,7 +111,7 @@ namespace Minion.Manager
 
         private bool CanMinionAttack()
         {
-            return _attackingMinions.Count < minionManagerConfig.maxMinionsAttackingAtSameTime;
+            return _attackingMinions.Count < _minionManagerConfig.maxMinionsAttackingAtSameTime;
         }
 
         private IEnumerator SpawnMinions()
@@ -119,10 +122,10 @@ namespace Minion.Manager
             _attackingMinions = new List<MinionAgent>();
 
             int minionsSpawned = 0;
-            while (minionsSpawned < minionSpawnerConfig.minionsToSpawn)
+            while (minionsSpawned < _minionSpawnerConfig.minionsToSpawn)
             {
-                if (minionsSpawned != 0) yield return new WaitForSeconds(minionSpawnerConfig.timeBetweenSpawns);
-                if (_minions.Count >= minionManagerConfig.maxMinionsAtSameTime) continue;
+                if (minionsSpawned != 0) yield return new WaitForSeconds(_minionSpawnerConfig.timeBetweenSpawns);
+                if (_minions.Count >= _minionManagerConfig.maxMinionsAtSameTime) continue;
 
                 GameObject minion = MinionObjectPool.Instance?.GetPooledObject();
                 if (minion == null)
@@ -134,7 +137,7 @@ namespace Minion.Manager
                 MinionAgent minionAgent = minion.GetComponent<MinionAgent>();
                 minionAgent.SetPlayer(player);
 
-                minion.transform.position = minionSpawnerConfig.GetSpawnPoint();
+                minion.transform.position = _minionSpawnerConfig.GetSpawnPoint();
                 minion.SetActive(true);
 
                 _minions.Add(minionAgent);
@@ -148,6 +151,12 @@ namespace Minion.Manager
         public void Clear()
         {
             RemoveAllMinions();
+        }
+
+        public void SetupManager(MinionsData levelConfigMinionsData)
+        {
+            _minionManagerConfig = levelConfigMinionsData.managerData;
+            _minionSpawnerConfig = levelConfigMinionsData.spawnerData;
         }
     }
 }

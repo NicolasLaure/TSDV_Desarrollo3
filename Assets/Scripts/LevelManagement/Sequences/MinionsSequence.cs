@@ -9,7 +9,7 @@ namespace LevelManagement.Sequences
     public class MinionsSequence : MonoBehaviour
     {
         [SerializeField] private MinionManager minionManager;
-
+        
         [Header("Events")] [SerializeField] private VoidEventChannelSO onAllMinionsDestroyedEvent;
         
         private bool _areAllMinionsDestroyed;
@@ -30,8 +30,9 @@ namespace LevelManagement.Sequences
             _postAction = postAction;
         }
 
-        public void SetupSequence()
+        public void SetupSequence(MinionsData levelConfigMinionsData)
         {
+            minionManager.SetupManager(levelConfigMinionsData);
             minionManager.gameObject.SetActive(false);
         }
 

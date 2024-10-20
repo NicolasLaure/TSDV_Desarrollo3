@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39da1732360bc045847c0c8e895238b, type: 3}
-  m_Name: MinionsManagerConfig
+  m_Script: {fileID: 11500000, guid: 23b82948e7f388245a5795447aa36f87, type: 3}
+  m_Name: MinionSpawnerFirstLoopConfig
   m_EditorClassIdentifier: 
-  maxMinionsAttackingAtSameTime: 1
-  maxMinionsAtSameTime: 5
+  spawnBounds: {fileID: 11400000, guid: 0cd70dbec5e60324ab8d0c7e1a758b09, type: 2}
+  minionsToSpawn: 5
+  timeBetweenSpawns: 3

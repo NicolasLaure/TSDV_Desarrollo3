@@ -1,4 +1,5 @@
 using System;
+using Minion.ScriptableObjects;
 using UnityEngine;
 
 namespace LevelManagement
@@ -33,6 +34,13 @@ namespace LevelManagement
         public int spawnQuantity;
         public float acceleration;
     }
+
+    [Serializable]
+    public class MinionsData
+    {
+        public MinionsManagerSO managerData;
+        public MinionSpawnerSO spawnerData;
+    }
     
     [CreateAssetMenu(menuName = "Level Loop Config", fileName = "LevelLoopConfig", order = 0)]
     public class LevelLoopSO : ScriptableObject
@@ -40,5 +48,6 @@ namespace LevelManagement
         public ObstacleData obstacleData;
         public RoadData roadData;
         public BossData bossData;
+        public MinionsData minionsData;
     }
 }

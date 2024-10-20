@@ -12,7 +12,7 @@ on:
 jobs:
   buildForWindows:
     name: Build for Windows
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: false
     steps:
@@ -40,7 +40,7 @@ jobs:
   deploy:
     needs: buildForWindows
     name: Deploy to Itch.io
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
   discordMessage:
     needs: deploy
     name: Discord Notification
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Check out repository 
         uses: actions/checkout@master

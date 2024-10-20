@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -540
       objectReference: {fileID: 0}
+    - target: {fileID: 1768480641377686789, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2097379021432303142, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -302,6 +306,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258374264763788351, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910141395132135618, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910141395132135618, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910141395132135618, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910141395132135618, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6763992835044990979, guid: 767b95ec14c42274d8fc3060f9c4d7b4, type: 3}
@@ -445,6 +465,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7430588238958385673, guid: 8b85d1512c9de1946bffefbefa40285d, type: 3}
       propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820245886773614880, guid: 8b85d1512c9de1946bffefbefa40285d, type: 3}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8052994783736390434, guid: 8b85d1512c9de1946bffefbefa40285d, type: 3}
@@ -1161,6 +1185,6 @@ SceneRoots:
   - {fileID: 1383703557}
   - {fileID: 110514242}
   - {fileID: 1188077576}
-  - {fileID: 788149524}
   - {fileID: 1190354512}
+  - {fileID: 788149524}
   - {fileID: 1677826147}

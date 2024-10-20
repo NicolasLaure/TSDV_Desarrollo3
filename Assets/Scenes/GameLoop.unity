@@ -1918,6 +1918,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 68da0e8aef79f8041932fb582d16cfcb, type: 2}
     - target: {fileID: 4072355942097122109, guid: 997a42626b659814cb0aa0d749e0b092, type: 3}
+      propertyPath: onCinematicStartEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 49bed95fec698814188e97e4aef4801b, type: 2}
+    - target: {fileID: 4072355942097122109, guid: 997a42626b659814cb0aa0d749e0b092, type: 3}
       propertyPath: onStartCinematicCanvas
       value: 
       objectReference: {fileID: 11400000, guid: f342628a186bcbe4e929001b50ef74a0, type: 2}
@@ -2063,6 +2067,7 @@ MonoBehaviour:
   playerVelocity: 10
   finishZPosition: 44
   creditsScene: Credits
+  onCinematicStartEvent: {fileID: 11400000, guid: 49bed95fec698814188e97e4aef4801b, type: 2}
   onCinematicPlayerLockStart: {fileID: 11400000, guid: b711b8f3d88f6614bb9d23a652188ca8, type: 2}
   onStartCinematicCanvas: {fileID: 11400000, guid: f342628a186bcbe4e929001b50ef74a0, type: 2}
   onEndCinematicCanvas: {fileID: 11400000, guid: 68da0e8aef79f8041932fb582d16cfcb, type: 2}

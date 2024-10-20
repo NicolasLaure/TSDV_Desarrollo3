@@ -18,7 +18,7 @@ namespace LevelManagement.Sequences
         [SerializeField] private float otherPlayersEndZPosition;
         [SerializeField] private float playerInitZPosition;
 
-        [Header("Events")]
+        [Header("Events")] [SerializeField] private VoidEventChannelSO onCinematicStartEvent;
         [SerializeField] private VoidEventChannelSO onCinematicPlayerLockStart;
         [SerializeField] private VoidEventChannelSO onCinematicPlayerLockFinished;
         [SerializeField] private VoidEventChannelSO onStartCinematicCanvas;
@@ -56,6 +56,7 @@ namespace LevelManagement.Sequences
 
         private IEnumerator RaiseStartCinematicEvent()
         {
+            onCinematicStartEvent?.RaiseEvent();
             onCinematicPlayerLockStart?.RaiseEvent();
             yield return null;
         }

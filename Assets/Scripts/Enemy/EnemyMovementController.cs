@@ -8,16 +8,16 @@ namespace Enemy
         [SerializeField] private EnemyConfigSO enemyConfig;
         [SerializeField] private Vector2 minMaxYMovement;
         [SerializeField] private float distanceToChangeDirection = 0.2f;
-        
-        private Vector3 _originPosition;
+
+        private float _originalY;
 
         private bool _shouldGoDown = false;
-        
-        void OnEnable()
+
+        private void OnEnable()
         {
-            _originPosition = enemyConfig.defaultPosition;
+            SetOriginalY();
         }
-        
+
         void Update()
         {
             Vector3 newPosition = GetHoverPosition();
@@ -27,18 +27,24 @@ namespace Enemy
 
         Vector3 GetHoverPosition()
         {
-            Vector3 maxPosition = _originPosition + transform.up * minMaxYMovement.y;
-            Vector3 minPosition = _originPosition + transform.up * minMaxYMovement.x;
+            float minPosition = _originalY + minMaxYMovement.x;
+            float maxPosition = _originalY + minMaxYMovement.y;
 
-            if (Vector3.Distance(transform.position, minPosition) < distanceToChangeDirection)
+
+            if (Mathf.Abs(transform.position.y - minPosition) < distanceToChangeDirection)
                 _shouldGoDown = false;
-            else if (Vector3.Distance(transform.position, maxPosition) < distanceToChangeDirection)
+            else if (Mathf.Abs(transform.position.y - maxPosition) < distanceToChangeDirection)
                 _shouldGoDown = true;
 
-            return Vector3.Lerp(
-                transform.position,
-                _shouldGoDown ? minPosition : maxPosition,
-                Time.deltaTime);
+            Vector3 currentPos = transform.position;
+            float targetY = _shouldGoDown ? minPosition : maxPosition;
+
+            return Vector3.Lerp(currentPos, new Vector3(currentPos.x, targetY, currentPos.z), Time.deltaTime);
+        }
+
+        public void SetOriginalY()
+        {
+            _originalY = transform.position.y;
         }
     }
 }

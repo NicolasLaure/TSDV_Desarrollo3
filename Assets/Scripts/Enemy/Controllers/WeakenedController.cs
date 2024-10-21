@@ -15,6 +15,7 @@ public class WeakenedController : EnemyController
     [SerializeField] private EnemyConfigSO enemyConfig;
     [SerializeField] private HealthPoints healthPoints;
     [SerializeField] private ShieldController shieldController;
+    [SerializeField] private EnemyMovementController movementController;
     [SerializeField] private bool shieldActive;
 
     [Header("ShieldProperties")]
@@ -94,5 +95,7 @@ public class WeakenedController : EnemyController
             transform.position = Vector3.Lerp(startingPos, target, timer / duration);
             yield return null;
         }
+
+        movementController.SetOriginalY();
     }
 }

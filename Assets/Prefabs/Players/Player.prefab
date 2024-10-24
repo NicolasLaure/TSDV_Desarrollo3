@@ -552,9 +552,11 @@ MonoBehaviour:
   inputHandler: {fileID: 11400000, guid: 4902f51743585ca40aec021ece06aa06, type: 2}
   animationHandler: {fileID: 977276183979043023}
   onPlayerDeath: {fileID: 11400000, guid: 1609b932e078810448a25604c23359d3, type: 2}
+  onTransitionToMovementEnded: {fileID: 11400000, guid: b159ad61c320d9d4da6cc1a8e06a8084, type: 2}
   onCinematicStarted: {fileID: 11400000, guid: b711b8f3d88f6614bb9d23a652188ca8, type: 2}
   onCinematicFinished: {fileID: 11400000, guid: 83f6a3608cca1b64a9e546fae228e30e, type: 2}
   meleeWeapon: {fileID: 4645382247631583565}
+  attackBufferSeconds: 0.5
   attackCurve:
     serializedVersion: 2
     m_Curve:
